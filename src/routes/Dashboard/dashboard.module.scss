@@ -1,0 +1,64 @@
+@use '/src/styles/constants/colors';
+
+.adSectionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1120px;
+  height: 743px;
+  margin-top: 100px;
+
+  .adSectionTitle {
+    align-self: flex-start;
+    padding: 0 0 20px 40px;
+    font-size: 16px;
+    font-weight: 700;
+    color: colors.$GRAY800;
+  }
+
+  .boardWrapper {
+    width: 1039px;
+    height: 654px;
+    padding: 40px;
+    background-color: colors.$WHITE;
+    border-radius: 20px;
+
+    .indicatorWrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+
+      li {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 304px;
+        height: 79px;
+        padding: 18px 40px;
+        border: 0.5px solid colors.$GRAY50;
+        border-radius: 10px;
+
+        dt {
+          margin-bottom: 10px;
+          font-size: 12px;
+          font-weight: 500;
+          color: colors.$GRAY300;
+        }
+
+        dd {
+          font-size: 16px;
+          font-weight: 700;
+          color: colors.$GRAY800;
+        }
+
+        span {
+          align-self: flex-end;
+          font-size: 12px;
+          font-weight: 500;
+          color: colors.$GRAY300;
+        }
+      }
+    }
+  }
+}

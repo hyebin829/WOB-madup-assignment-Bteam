@@ -1,7 +1,12 @@
+import AdTop from './adTop'
 import styles from './dashboard.module.scss'
 
 const Dashboard = (): JSX.Element => {
-  return <div>Dashboard</div>
+  return (
+    <div>
+      <AdTop />
+    </div>
+  )
 }
 
 export default Dashboard
