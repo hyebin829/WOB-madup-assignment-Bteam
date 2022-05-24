@@ -89,15 +89,19 @@ const Dashboard = () => {
           )}
         </div>
       </header>
-      <div className={styles.adSectionWrapper}>
-        <h2 className={styles.adSectionTitle}>통합 광고 현황</h2>
-        <div className={styles.boardWrapper}>
-          <AdTop />
-          <Chart />
+      <main>
+        <div className={styles.adSectionWrapper}>
+          <h2 className={styles.adSectionTitle}>통합 광고 현황</h2>
+          <div className={styles.boardWrapper}>
+            <AdTop />
+            <Chart />
+          </div>
         </div>
-      </div>
-      <h2 className={styles.currentStatusOfMediumTitle}>매체 현황</h2>
-      <CurrentStatusOfMedium />
+        <div className={styles.currentStatusOfMediumSectionWrapper}>
+          <h2 className={styles.currentStatusOfMediumTitle}>매체 현황</h2>
+          <CurrentStatusOfMedium />
+        </div>
+      </main>
     </div>
   )
 }

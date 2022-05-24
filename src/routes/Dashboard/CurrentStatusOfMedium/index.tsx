@@ -125,7 +125,7 @@ const CurrentStatusOfMedium = () => {
               tickFormat={['매출', '광고비', '노출 수', '클릭 수', '전환 수']}
             />
             <VictoryAxis dependentAxis tickFormat={(x) => `${x}%`} />
-            <VictoryStack colorScale='qualitative'>
+            <VictoryStack colorScale={['#56adf7', '#85da47', '#ac8af8', '#f8d849']}>
               <VictoryBar data={createVictoryBarData('google')} x='xAxis' y='yAxis' />
               <VictoryBar data={createVictoryBarData('facebook')} x='xAxis' y='yAxis' />
               <VictoryBar data={createVictoryBarData('naver')} x='xAxis' y='yAxis' />
