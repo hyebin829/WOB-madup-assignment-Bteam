@@ -1,4 +1,4 @@
-import AdTop from './AdTop'
+import AdTop from './adTop'
 import styles from './dashboard.module.scss'
 
 const Dashboard = (): JSX.Element => {
