@@ -2,7 +2,6 @@ import { IAdsItem } from 'types/ads'
 import { axios } from 'hooks/worker'
 import { IByChannelData } from 'types/dashboard'
 
-
 const DATA_URL = 'http://localhost:1004/adlist'
 const DATA_URL2 = `http://localhost:3004/`
 

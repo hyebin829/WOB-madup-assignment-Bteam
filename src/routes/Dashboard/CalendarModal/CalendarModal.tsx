@@ -3,25 +3,35 @@ import { useSetRecoilState } from 'recoil'
 import { DateRange } from 'react-date-range'
 import { ko } from 'date-fns/locale'
 import dayjs from 'dayjs'
+import store from 'store'
 
 import { byChannelFetchState, dailyFetchState } from 'states/dashboard'
 
 import styles from './calendarModal.module.scss'
 import 'react-date-range/dist/styles.css'
 import 'react-date-range/dist/theme/default.css'
-import { LogoIcon } from 'assets/svgs'
 
 interface IProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>
-  setCurrentStartDate: Dispatch<SetStateAction<string>>
-  setCurrentEndDate: Dispatch<SetStateAction<string>>
 }
 
-const CalendarModal = ({ setIsModalOpen, setCurrentStartDate, setCurrentEndDate }: IProps) => {
+const currentStartDate = store.get('startDate')
+const currentEndDate = store.get('endDate')
+const prevStartDate = store.get('prevStartDate')
+const prevEndDate = store.get('prevEndDate')
+
+if (!currentStartDate && !currentEndDate) {
+  store.set('startDate', '2022-04-14')
+  store.set('endDate', '2022-04-20')
+  store.set('prevEndDate', '2022-04-13')
+  store.set('prevStartDate', '2022-04-07')
+}
+
+const CalendarModal = ({ setIsModalOpen }: IProps) => {
   const [dateRange, setDateRange] = useState<any>([
     {
-      startDate: new Date(2022, 1, 1),
-      endDate: new Date(2022, 1, 2),
+      startDate: new Date(dayjs(currentStartDate).format('YYYY-MM-DD')),
+      endDate: new Date(dayjs(currentEndDate).format('YYYY-MM-DD')),
       key: 'selection',
     },
   ])
@@ -32,16 +42,17 @@ const CalendarModal = ({ setIsModalOpen, setCurrentStartDate, setCurrentEndDate 
   const startDateTransformed = dayjs(dateRange[0].startDate).format('YYYY-MM-DD')
   const endDateTransformed = dayjs(dateRange[0].endDate).format('YYYY-MM-DD')
 
-  // console.log(startDateTransformed)
-  // console.log(endDateTransformed)
-
   const handleModalClose = () => {
     setIsModalOpen(false)
   }
 
   const handleGetData = () => {
-    setCurrentStartDate(startDateTransformed)
-    setCurrentEndDate(endDateTransformed)
+    const diffSelectedDate = dayjs(endDateTransformed).diff(dayjs(startDateTransformed), 'day')
+    store.set('startDate', startDateTransformed)
+    store.set('endDate', endDateTransformed)
+    const prevDate = dayjs(startDateTransformed).subtract(1, 'day').format('YYYY-MM-DD')
+    store.set('prevEndDate', dayjs(startDateTransformed).subtract(1, 'day').format('YYYY-MM-DD'))
+    store.set('prevStartDate', dayjs(prevDate).subtract(diffSelectedDate, 'day').format('YYYY-MM-DD'))
     setDailyFetch(true)
     setByChannelFetch(true)
     setIsModalOpen(false)
