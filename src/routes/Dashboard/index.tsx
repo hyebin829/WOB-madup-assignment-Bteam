@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useQuery } from 'react-query'
 import { useRecoilState } from 'recoil'
 import dayjs from 'dayjs'
+import store from 'store'
 
 import { axios } from 'hooks/worker'
 import { byChannelDataResultState, byChannelFetchState, dailyDataResultState, dailyFetchState } from 'states/dashboard'
@@ -18,8 +19,10 @@ const defaultEndDate = dayjs(new Date(2022, 1, 2)).format('YYYY-MM-DD')
 
 const Dashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [currentStartDate, setCurrentStartDate] = useState(defaultStartDate)
-  const [currentEndDate, setCurrentEndDate] = useState(defaultEndDate)
+  // const [currentStartDate, setCurrentStartDate] = useState(defaultStartDate)
+  // const [currentEndDate, setCurrentEndDate] = useState(defaultEndDate)
+  const currentStartDate = store.get('startDate')
+  const currentEndDate = store.get('endDate')
   const [dailyFetch, setDailyFetch] = useRecoilState(dailyFetchState)
   const [byChannelFetch, setByChannelFetch] = useRecoilState(byChannelFetchState)
   const [dailyData, setDailyData] = useRecoilState(dailyDataResultState)
@@ -68,7 +71,7 @@ const Dashboard = () => {
   // dailyData: 날짜별 데이터
   // byChannelData: 채널 별 데이터
   console.log(dailyData)
-  console.log(byChannelData)
+  // console.log(byChannelData)
 
   return (
     <div>
@@ -80,11 +83,7 @@ const Dashboard = () => {
           </button>
           {isModalOpen && (
             <div className={styles.calendar}>
-              <CalendarModal
-                setIsModalOpen={setIsModalOpen}
-                setCurrentStartDate={setCurrentStartDate}
-                setCurrentEndDate={setCurrentEndDate}
-              />
+              <CalendarModal setIsModalOpen={setIsModalOpen} />
             </div>
           )}
         </div>

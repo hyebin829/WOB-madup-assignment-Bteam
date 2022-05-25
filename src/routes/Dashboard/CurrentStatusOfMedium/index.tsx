@@ -107,14 +107,6 @@ const CurrentStatusOfMedium = () => {
   }
   const reducedDataArr = [reduceData('google'), reduceData('naver'), reduceData('facebook'), reduceData('kakao')]
 
-  console.log(
-    reducedDataArr,
-    createVictoryBarData('google'),
-    createVictoryBarData('facebook'),
-    createVictoryBarData('naver'),
-    createVictoryBarData('kakao')
-  )
-
   return (
     <div className={styles.currentStatusOfMediumContainer}>
       <div className={styles.rechartsContainer}>
